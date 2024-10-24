@@ -19,12 +19,8 @@
       community.general.slack:
         token: "xoxb-7935070466084-7932628298002-SSBBdDRntxMJreIMU08tcbfJ"
         msg: "¡Despliegue completado con éxito!"
-        channel: "#anible"
+        channel: "#ansible"
 
-    - name: Send notification message via Slack
-      community.general.slack:
-        token: "xoxb-7935070466084-7932628298002-SSBBdDRntxMJreIMU08tcbfJ"
-        msg: '{{ Workshop Inventory }} completed'
-        delegate_to: localhost
+
 
       
