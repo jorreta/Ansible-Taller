@@ -6,7 +6,6 @@
   #  - name: Dame un mensaje
   #    ansible.builtin.debug:
   #      msg: "Bienvenido al mundo de Ansible"
-      
     - name: Upgrade all packages
       ansible.builtin.yum:
         name: '*'
