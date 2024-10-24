@@ -13,4 +13,4 @@
       register: salida_dnf
     - name: reboot si hubo actualizacion
       ansible.bultin.reboot: 
-      when salida_dnf is changed
+      when: salida_dnf is changed
