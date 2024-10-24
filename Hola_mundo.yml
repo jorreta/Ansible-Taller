@@ -1,6 +1,7 @@
 - name: Un playbook muy muy sencillo
   # A quienes se les va a operar 
   hosts: web
+  become: true
   tasks:
     - name: Dame un mensaje
       ansible.builtin.debug:
@@ -9,4 +10,7 @@
       ansible.builtin.yum:
         name: '*'
         state: latest
-        become: true
+      register: salida_dnf
+    - name: reboot si hubo actualizacion
+      ansible.bultin.reboot 
+      when salida_dnf is changed
