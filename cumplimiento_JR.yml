@@ -4,8 +4,8 @@
   gather_facts: true
   vars:
     allowed_users:
-      - roots
-      - admins
+      - root
+      - admin
     password_min_length: 12
     password_complexity: "YES"
     password_max_age: 90
@@ -21,3 +21,11 @@
       shell: "cut -d: -f1 /etc/passwd"
       register: passwd_users
       changed_when: false
+    - name: Verificar configuración de complejidad de contraseñas
+      lineinfile:
+        path: /etc/security/pwquality.conf
+        regexp: "^minclass"
+        line: "minclass = 4"  # Exige 4 tipos de caracteres: mayúsculas, minúsculas, números, símbolos
+        state: present
+      when: password_complexity == "YES"
+
