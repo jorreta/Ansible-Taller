@@ -4,8 +4,8 @@
   gather_facts: true
   vars:
     allowed_users:
-      - roots
-      - admins
+      - root
+      - daemon
     password_min_length: 11
     password_complexity: "YES"
     password_max_age: 90
@@ -45,9 +45,13 @@
         path: /etc/securetty
         line: tty1
         create: yes
-    - name: Asegurarse de que sólo existan usuarios permitidos
+    - name: Comp6:Asegurarse de que sólo existan usuarios permitidos
       fail:
         msg: "Usuario no autorizado encontrado: {{ item }}"
       when: item not in allowed_users
       loop: "{{ passwd_users.stdout_lines }}"
+    - name: Verificar que solo estén en ejecución los servicios permitidos
+      shell: "systemctl list-units --type=service --state=running --no-pager --no-legend"
+      register: running_services
+      changed_when: false
 
