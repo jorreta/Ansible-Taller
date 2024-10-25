@@ -40,4 +40,9 @@
         regexp: "^PASS_MAX_DAYS"
         line: "PASS_MAX_DAYS {{ password_max_age }}"
         state: present
+    - name: Asegurarse de que el root sólo pueda hacer login desde la consola
+      lineinfile:
+        path: /etc/securetty
+        line: tty1
+        create: yes
 
