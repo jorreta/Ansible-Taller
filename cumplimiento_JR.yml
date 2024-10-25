@@ -65,6 +65,11 @@
       fail:
         msg: "Usuario no autorizado encontrado: {{ item }}"
       when: item not in allowed_users
+    - name: Comp10:Verificar que los paquetes requeridos estén instalados
+      package:
+        name: "{{ item }}"
+        state: present
+      loop: "{{ required_packages }}"
       loop: "{{ passwd_users.stdout_lines }}"
       
       
