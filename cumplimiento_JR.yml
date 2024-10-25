@@ -1,5 +1,5 @@
 - name: Playbook de cumplimiento
-  hosts: web
+  hosts: node1
   become: true
   gather_facts: true
   vars:
@@ -16,7 +16,7 @@
     required_packages:
       - audit
       - rsyslog
-    tasks:
+  tasks:
     - name: Validar usuarios permitidos en /etc/passwd
       shell: "cut -d: -f1 /etc/passwd"
       register: passwd_users
