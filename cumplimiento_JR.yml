@@ -45,15 +45,21 @@
         path: /etc/securetty
         line: tty1
         create: yes
-    - name: Comp7:Asegurarse de que el root sólo pueda hacer login desde la consola
+    - name: Comp6:Asegurarse de que el root sólo pueda hacer login desde la consola
       lineinfile:
         path: /etc/securetty
         line: tty1
         create: yes
-    - name: Comp6:Asegurarse de que sólo existan usuarios permitidos
+    - name: Com7:Configurar logs del sistema con rsyslog
+      service:
+        name: rsyslog
+        state: started
+        enabled: true
+    - name: Comp8:Asegurarse de que sólo existan usuarios permitidos
       fail:
         msg: "Usuario no autorizado encontrado: {{ item }}"
       when: item not in allowed_users
       loop: "{{ passwd_users.stdout_lines }}"
+      
 
 
