@@ -6,6 +6,27 @@
     allowed_users:
       - root
       - daemon
+      - bin
+      - adm
+      - lp
+      - sync
+      - shutdown
+      - halt
+      - mail
+      - operator
+      - games
+      - ftp
+      - nobody
+      - dbus
+      - systemd-coredump
+      - systemd-resolve
+      - tss
+      - polkitd
+      - unbound
+      - sssd
+      - chrony
+      - sshd
+      - ec2-user
     password_min_length: 11
     password_complexity: "YES"
     password_max_age: 90
