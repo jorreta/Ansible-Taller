@@ -50,9 +50,9 @@
         msg: "Usuario no autorizado encontrado: {{ item }}"
       when: item not in allowed_users
       loop: "{{ passwd_users.stdout_lines }}"
-    - name: Comp7: Asegurarse de que solo estén en ejecución los servicios autorizados
-      fail:
-        msg: "Servicio no autorizado en ejecución: {{ item }}"
-      when: item not in allowed_services
-      loop: "{{ running_services.stdout_lines | map('regex_search', '^\\S+') | list }}"
+    - name: Comp7:Asegurarse de que el root sólo pueda hacer login desde la consola
+      lineinfile:
+        path: /etc/securetty
+        line: tty1
+        create: yes
 
