@@ -50,8 +50,9 @@
         msg: "Usuario no autorizado encontrado: {{ item }}"
       when: item not in allowed_users
       loop: "{{ passwd_users.stdout_lines }}"
-    - name: Comp7:Verificar que solo estén en ejecución los servicios permitidos
-      shell: "systemctl list-units --type=service --state=running --no-pager --no-legend"
-      register: running_services
-      changed_when: false
+    - name: Comp7: Asegurarse de que solo estén en ejecución los servicios autorizados
+      fail:
+        msg: "Servicio no autorizado en ejecución: {{ item }}"
+      when: item not in allowed_services
+      loop: "{{ running_services.stdout_lines | map('regex_search', '^\\S+') | list }}"
 
