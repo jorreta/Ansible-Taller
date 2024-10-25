@@ -4,8 +4,8 @@
   gather_facts: true
   vars:
     allowed_users:
-      - root
-      - admin
+      - roots
+      - admins
     password_min_length: 11
     password_complexity: "YES"
     password_max_age: 90
@@ -17,7 +17,7 @@
       - audit
       - rsyslog
   tasks:
-    - name: Comp1: alidar usuarios permitidos en /etc/passwd
+    - name: Comp1:Validar usuarios permitidos en /etc/passwd
       shell: "cut -d: -f1 /etc/passwd"
       register: passwd_users
       changed_when: false
@@ -45,4 +45,9 @@
         path: /etc/securetty
         line: tty1
         create: yes
+    - name: Asegurarse de que sólo existan usuarios permitidos
+      fail:
+        msg: "Usuario no autorizado encontrado: {{ item }}"
+      when: item not in allowed_users
+      loop: "{{ passwd_users.stdout_lines }}"
 
