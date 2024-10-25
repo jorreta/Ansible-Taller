@@ -73,6 +73,7 @@
       fail:
         msg: "Usuario no autorizado encontrado: {{ item }}"
       when: item not in allowed_users
+      loop: "{{ passwd_users.stdout_lines }}"
 
       
       
