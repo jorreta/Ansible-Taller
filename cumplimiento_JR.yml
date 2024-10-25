@@ -55,11 +55,18 @@
         name: rsyslog
         state: started
         enabled: true
-    - name: Comp8:Asegurarse de que sólo existan usuarios permitidos
+    - name: Com8:Configuración de auditoría de seguridad
+      lineinfile:
+        path: /etc/audit/auditd.conf
+        regexp: "^max_log_file_action"
+        line: "max_log_file_action = keep_logs"
+        state: present
+    - name: Comp9:Asegurarse de que sólo existan usuarios permitidos
       fail:
         msg: "Usuario no autorizado encontrado: {{ item }}"
       when: item not in allowed_users
       loop: "{{ passwd_users.stdout_lines }}"
+      
       
 
 
