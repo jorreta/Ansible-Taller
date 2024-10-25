@@ -34,4 +34,10 @@
         regexp: "^minlen"
         line: "minlen = {{ password_min_length }}"
         state: present
+    - name: Verificar edad máxima de contraseñas
+      lineinfile:
+        path: /etc/login.defs
+        regexp: "^PASS_MAX_DAYS"
+        line: "PASS_MAX_DAYS {{ password_max_age }}"
+        state: present
 
