@@ -61,7 +61,7 @@
         regexp: "^max_log_file_action"
         line: "max_log_file_action = keep_logs"
         state: present
-    - name: Verificar permisos en archivos importantes
+    - name: Comp9:Verificar permisos en archivos importantes
       file:
         path: "{{ item }}"
         mode: "0600"
@@ -69,7 +69,7 @@
       loop:
         - /etc/shadow
         - /etc/gshadow
-    - name: Comp9:Asegurarse de que sólo existan usuarios permitidos
+    - name: Comp10:Asegurarse de que sólo existan usuarios permitidos
       fail:
         msg: "Usuario no autorizado encontrado: {{ item }}"
       when: item not in allowed_users
