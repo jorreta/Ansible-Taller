@@ -6,7 +6,7 @@
     allowed_users:
       - root
       - admin
-    password_min_length: 12
+    password_min_length: 11
     password_complexity: "YES"
     password_max_age: 90
     allowed_services:
