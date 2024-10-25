@@ -28,4 +28,10 @@
         line: "minclass = 4"  # Exige 4 tipos de caracteres: mayúsculas, minúsculas, números, símbolos
         state: present
       when: password_complexity == "YES"
+    - name: Verificar configuración de longitud mínima de contraseñas
+      lineinfile:
+        path: /etc/security/pwquality.conf
+        regexp: "^minlen"
+        line: "minlen = {{ password_min_length }}"
+        state: present
 
