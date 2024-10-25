@@ -4,8 +4,8 @@
   gather_facts: true
   vars:
     allowed_users:
-      - root
-      - admin
+      - roots
+      - admins
     password_min_length: 12
     password_complexity: "YES"
     password_max_age: 90
