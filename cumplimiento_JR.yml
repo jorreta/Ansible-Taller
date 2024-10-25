@@ -17,30 +17,30 @@
       - audit
       - rsyslog
   tasks:
-    - name: Validar usuarios permitidos en /etc/passwd
+    - name: Comp1: alidar usuarios permitidos en /etc/passwd
       shell: "cut -d: -f1 /etc/passwd"
       register: passwd_users
       changed_when: false
-    - name: Verificar configuración de complejidad de contraseñas
+    - name: Comp2:Verificar configuración de complejidad de contraseñas
       lineinfile:
         path: /etc/security/pwquality.conf
         regexp: "^minclass"
         line: "minclass = 4"  # Exige 4 tipos de caracteres: mayúsculas, minúsculas, números, símbolos
         state: present
       when: password_complexity == "YES"
-    - name: Verificar configuración de longitud mínima de contraseñas
+    - name: Comp3:Verificar configuración de longitud mínima de contraseñas
       lineinfile:
         path: /etc/security/pwquality.conf
         regexp: "^minlen"
         line: "minlen = {{ password_min_length }}"
         state: present
-    - name: Verificar edad máxima de contraseñas
+    - name: Comp4:Verificar edad máxima de contraseñas
       lineinfile:
         path: /etc/login.defs
         regexp: "^PASS_MAX_DAYS"
         line: "PASS_MAX_DAYS {{ password_max_age }}"
         state: present
-    - name: Asegurarse de que el root sólo pueda hacer login desde la consola
+    - name: Comp5:Asegurarse de que el root sólo pueda hacer login desde la consola
       lineinfile:
         path: /etc/securetty
         line: tty1
